@@ -1,0 +1,12 @@
+#
+Last login: Wed Sep 22 03:19:03 2021 from 111.255.201.132
+lab@f9f78d214892:~$ ls
+base64.txt  flag  hex.txt
+lab@f9f78d214892:~$ cat flag
+BreakALLCTF{Sobkjgd14VuIFBUtgVts}
+lab@f9f78d214892:~$ ls -A
+.bash_logout  .bashrc  .hidden  .profile  base64.txt  flag  hex.txt
+lab@f9f78d214892:~$ -A
+-bash: -A: command not found
+lab@f9f78d214892:~$ cat .hidden
+BreakALLCTF{WucLSg4cxPNYuXFF5XxJ}
