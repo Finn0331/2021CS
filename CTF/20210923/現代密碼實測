@@ -1,5 +1,5 @@
 # 3_1_2_python現代密碼實測_pycrypto(20210923)
-------------------------------------------------------------------
+'''
 #安裝pycrypto
 ##!pip install pycrypto
 
@@ -13,16 +13,16 @@ Building wheels for collected packages: pycrypto
 Successfully built pycrypto
 Installing collected packages: pycrypto
 Successfully installed pycrypto-2.6.1
-------------------------------------------------------------------
+'''
 #利用prcrypto取得最大公因數
 
 from Crypto.Util.number import GCD
 
 GCD(12,18)
 6
-------------------------------------------------------------------
+'''
 #AES對稱式加解密
-------------------------------------------------------------------
+'''
 #AES加密
 from Crypto.Cipher import AES
 
@@ -34,13 +34,13 @@ ciphertext = obj.encrypt(message)
 ciphertext
 
 b'J\xae\xd1J\xbdS\x8d\x99\xaf\xc3N\xba\xde\xeb>['
-------------------------------------------------------------------
+'''
 #AES解密
 obj2 = AES.new('This is a key123', AES.MODE_CBC, 'This is an IV456')
 
 obj2.decrypt(ciphertext)
 
 b'flag(HappyCrypt)'
-------------------------------------------------------------------
+'''
 #安裝libnum
 
