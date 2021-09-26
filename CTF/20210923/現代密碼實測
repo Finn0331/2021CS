@@ -45,3 +45,8 @@ b'flag(HappyCrypt)'
 '''
 #安裝libnum
 
+import libnum
+
+s="flag{happyCryptoDay}"
+number = libnum.s2n(s)
+number
