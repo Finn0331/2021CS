@@ -1,7 +1,7 @@
 # 3_1_2_python現代密碼實測_pycrypto(20210923)
 ------------------------------------------------------------------
 #安裝pycrypto
-#!pip install pycrypto
+##!pip install pycrypto
 
 Collecting pycrypto
   Downloading pycrypto-2.6.1.tar.gz (446 kB)
