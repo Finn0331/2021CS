@@ -1,0 +1,309 @@
+# 3:存取控制與身分認證
+
+- [3_1_存取控制與特權管理](#3_1_存取控制與特權管理)
+- [3_2_身分認證](#3_2_身分認證)
+- [3_3_加解密_金鑰管理](#3_3_加解密_金鑰管理)
+
+- [CISSP Domain 5—識別 暨 存取控制]
+  - 資產的 實體及邏輯 存取控制
+  - 管理  人員與裝置  的 識別與鑑別
+  - 整合[第三方識別服務]
+  - 建置與管理 授權機制
+  - 管理  識別與存取供應  生命週期
+
+## 3_1_存取控制與特權管理
+
+## [存取控制(Access_control)](https://en.wikipedia.org/wiki/Access_control)
+
+- 存取控制（Access control）是指對存取者向受保護資源進行存取操作的控制管理。
+- 該控制管理保證被授權者可存取受保護資源，未被授權者不能存取受保護資源。
+
+存取控制定義
+```
+• 主體(Subject)
+– 主動發起存取行為的個體
+– 通常為資料流的起點
+– 例如：使用者與處理程式
+
+• 物件(Object)
+– 被動存取的個體
+– 通常為資料的接收端與保存端
+– 例如：檔案、資料庫及處理程式
+
+• 存取(Access)
+– 主體對物件進行某些動作
+– 例如：讀取、修改、刪除、建立或執行
+
+• 存取規則(Access Rule)
+– 可強制控管主體與物件之間存取路徑的控制機制
+
+• 信賴路徑(Trusted Path)
+– 確保主體可以存取到其所預期存取到之物件的路徑
+```
+### 三大存取控制類型[超重要]
+
+- Security Controls安全控制
+  - Computer security is often divided into three distinct master categories, commonly referred to as controls
+  - These three broad categories define the main objectives of proper security implementation. 
+  - Within these controls are sub-categories that further detail the controls and how to implement them.  
+
+
+- 1.實體類控制(Physical Controls)
+  - Physical control is the implementation of security measures in a defined structure used to deter or prevent unauthorized access(非授權的存取) to sensitive material. 
+  - 實體環境的存取控制
+    - 存取控制的角色
+    - 主體：人員
+    - 物件：機房、線路室、保險櫃及電腦等
+    - 存取規則：只有在職員工能從1F大門進出
+    - 強制信賴路徑：2M圍牆加電網、獨棟建物且與其他建物棟距20M以上(強制性足夠嗎？)
+    - 存取控制的管理
+      – 鑑別：門口警衛檢查人員通行證
+      – 授權：通行證有效且為在職員工者放行，無效或非在職員工則不放行
+      – 可歸責性：登記人員進出的時間、目的、攜入或攜出的物品
+  - 實體控制範例:
+    - Closed-circuit surveillance cameras監視器
+    - Motion or thermal alarm systems
+    - Security guards安全防護
+    - Picture IDs
+    - Locked and dead-bolted steel doors
+    - 門禁系統
+    - Biometrics[生物控制] (includes fingerprint, voice, face, iris, handwriting, and other automated methods used to recognize individuals) 
+
+
+- 2.技術類控制(Technical Controls)
+  - use technology(技術)as a basis for controlling the access and usage of sensitive data throughout a physical structure and over a network. 
+  - 技術類控制範例Technical controls are far-reaching in scope and encompass such technologies as:
+    - Encryption加密
+    - Smart cards智慧卡
+    - Network authentication網路認證
+    - Access control lists (ACLs)存取控制清單
+    - File integrity auditing software檔案完整性稽核軟體
+      - [6 Best File Integrity Monitoring Software in 2020(Staff,2020)](https://www.dnsstuff.com/file-integrity-monitoring-software) 
+      - Tripwire
+        - [How To Install tripwire on kali](https://installlion.com/kali/kali/main/t/tripwire/install/index.html)
+        - 安裝: sudo apt-get install tripwire
+        - [Tripwire Installation and Configuration](https://www.youtube.com/watch?v=P2uUgu5P6eg)
+
+- 3.管理類控制(Administrative Controls)
+
+```
+https://web.mit.edu/rhel-doc/4/RH-DOCS/rhel-sg-en-4/s1-sgs-ov-controls.html
+```
+
+
+### 存取控制 seven功能
+```
+http://cisspstudy.blogspot.com/2007/05/types-of-access-control.html
+```
+```
+防禦性(Preventive)
+
+偵測性(Detective)
+
+矯正性(Corrective)
+
+嚇阻性(Deterrent)
+
+復原性(Recovery)
+
+補償性(Compensation)
+```
+
+### 存取控制管理
+- 帳號管理(身分識別與鑑別):：主要管理的內容是使用者之身分識別與鑑別
+  - 身分識別(Identification)：主體告知身分識別資訊，例如：帳號、使用者代號及使用者名稱
+    - 範例: 帳號、使用者代號及使用者名稱 
+  - 身分鑑別(Authentication)：驗證身分識別資訊的技術，例如：通行碼、生物特徵及動態通行碼
+    - 範例:通行碼、生物特徵及動態通行碼
+
+- 授權 (Authorization)原則 ==> 決定主體是否能夠存取物件的判斷準則
+  - 業務僅知原/僅知(Need to know)==>只提供執行業務上所需知道的資訊
+  - 最小權限原則(Least privilege) ==> 權限開放時採用最小權限原則
+  - 職務區隔|Segregation of Duties (SOD)| Segregation of Duties (SOD) ==> 球員不能兼裁判 
+    - 避免某些衝突或監督工作職務由同一個人來進行
+    - 避免某些衝突或監督工作職務由同一個人來進行。例如:會計與出納不應由同一個人來進行，以確保不會有人可以侵佔款項同時修改紀錄
+    - 掌管存取安全的人員不應擔任安全稽核的工作、程式設計師不應負責程式上線的工作 ，以避免營私舞弊的情況發生
+  - 特殊權限管理 ==> 對於系統管理者帳號及相關安全組態設定權限，應採特別的控管方式，並詳細記錄特權人員的存取行為
+ 
+- 可歸責性(Accountability)：包含稽核紀錄(Auditing)與存取行為不可否認的可歸責性機制
+
+### [Access control models存取控制模型 WIKI整理的](https://en.wikipedia.org/wiki/Access_control)
+
+- `自主`存取控制(`Discretionary` access control)(DAC)
+  - In DAC, the data owner determines who can access specific resources. 
+  - For example, a system administrator may create a hierarchy of files to be accessed based on certain permissions. 
+
+-`強制`存取控制(`Mandatory` access control) (MAC)
+  - In MAC, users do not have much freedom to determine who has access to their files. 
+  - For example, security clearance of users and classification of data (as confidential, secret or top secret) are used as security labels to define the level of trust.
+
+- `角色`存取控制(`Role`-based access control)(RBAC)
+  - RBAC allows access based on the `job` title. 
+  - RBAC largely eliminates discretion when providing access to objects. 
+  - For example, a human resources specialist should not have permissions to create network accounts; this should be a role reserved for network administrators.
+
+- `規則`存取控制(`Rule`-Based Access Control) (RAC)
+  - RAC method is largely context based. 
+  - Example of this would be only allowing students to use the labs during a certain time of day. 
+
+- `屬性`存取控制(`Attribute`-based access control)(ABAC)
+  - An access control paradigm whereby access rights are granted to users through the use of policies which evaluate attributes (user attributes, resource attributes and environment conditions) 
+
+```
+History-Based Access Control (HBAC)
+Access is granted or declined based on the real-time evaluation of a history of activities of the inquiring party, e.g. behavior, time between requests, content of requests.[18] For example, the access to a certain service or data source can be granted or declined on the personal behavior, e.g. the request interval exceeds one query per second.
+
+Identity-Based Access Control (IBAC)
+Using this network administrators can more effectively manage activity and access based on individual needs.[19]
+
+Organization-Based Access control (OrBAC)
+OrBAC model allows the policy designer to define a security policy independently of the implementation[20]
+
+Responsibility Based Access control
+Information is accessed based on the responsibilities assigned to an actor or a business role
+```
+
+### `作業系統`的存取控制
+```
+• 存取控制的`角色`
+– 主體：`人員`與執行中的`程式(Process)`
+– 物件：檔案、資料庫、其他執行中的程式及記憶體等
+– 存取規則：`通行碼檔案{密碼檔案}`只能被管理者存取
+– 強制信賴路徑：所有磁碟機的檔案存取由OS控制，一般程式不能直接存取磁碟機，使用者所執行的程式繼承該使用者的身分與權限(強制性足夠嗎？)
+
+• 存取控制的`管理`
+– 鑑別：簽入作業(帳號通行碼比對正確)
+– 授權：是否為管理者群組？是否符合檔案存取權限？
+– 可歸責性：檔案開啟、修改及刪除都被記錄下來，包含時間與存取者等
+```
+
+
+## 3_2_身分認證
+
+- [身分認證Authentication](https://en.wikipedia.org/wiki/Authentication)
+- 身分驗證（Authentication）|「驗證」|「鑒權」|==> 通過一定的手段，完成對`使用者身分`的確認。
+- 身分驗證的目的: 確認目前所聲稱為某種身分的使用者，確實是所聲稱的使用者。
+  - 範例:通過檢查對方的`證件`，我們一般可以確信對方的身分。
+- 身分驗證的方法有很多：
+  - 基於共享金鑰的身分驗證
+  - 基於生物學特徵的身分驗證和
+  - 基於公開金鑰加密演算法的身分驗證。
+  - 不同的身分驗證方法，安全性也各有高低。
+
+### [Authentication](https://en.wikipedia.org/wiki/Authentication) 三大因子(factors):
+
+- 所知之事，你知| Something you `know`| the knowledge factors
+  - a password, partial password, pass phrase, `personal identification number (PIN)`, 
+  - challenge response (the user must answer a question, or pattern), Security question
+
+- 所持之物，你有(Something you `have`)| the ownership factors:
+  - `wrist band`, `ID card`, security token, implanted device, cell phone with built-in hardware token, 
+  - software token, or cell phone holding a software token)
+
+- 所具之形，你是 |Something you `are` | the inherence factors
+  - fingerprint, retinal pattern, DNA sequence 
+  - (there are assorted definitions of what is sufficient), signature, face, voice, unique bio-electric signals, or other biometric identifier).
+
+### Single-factor authentication[單因子驗證] vs  Multi-factor authentication[多因子驗證]
+
+- Multi-factor authentication[多因子驗證]
+- 同時採用兩種鑑別因素的鑑別技術，即可稱為強固鑑別技術
+  - 晶片卡(Have)配合PIN碼(Know)
+  - 指紋(Are)配合通行碼(Know)
+  - 晶片卡(Have)配合指紋(Are)
+
+## 驗證方法與鑑別技術
+
+## 1_通行碼身分鑑別技術
+- 目前使用「最廣泛」也「最簡便」的身分鑑別技術
+- 也是最不安全的身分鑑別技術:
+  - 使用者選用了「懶人通行碼」
+  - 共用通行碼
+  - 將通行碼貼在螢幕上
+  - 從不更改通行碼
+  - 輸入通行碼時被別人看到按下的通行碼
+  - 這組通行碼安全嗎？
+- 針對通行碼的攻擊
+  - 字典猜測法
+  - 暴力式通行碼猜測
+  - 通行碼監聽
+- 防護措施(避免通行碼被破解)
+  - 系統強制要求長度至少8碼
+  - 包含文字、數字及符號、包含大小寫
+  - 在字典中查不到
+  - 系統強制要求使用者定期更換通行碼
+  - 由系統判斷通行碼不重覆使用
+  - 可限制通行碼容許簽入失敗的次數
+  - 簽入成功或失敗都應被記錄
+  - 使用通行碼檢測工具尋找脆弱通行碼
+  - 通行碼不以明碼方式儲存(湊雜與加密)
+  - 通行碼不以明碼方式在網路上傳送
+  - 加強保護集中存放通行碼雜湊值的伺服器
+
+## 2_一次性通行碼(One-time Password)| 動態通行碼 鑑別技術 
+- [OTP（One-Time Password）](https://en.wikipedia.org/wiki/One-time_password)
+- 由隨身攜帶的符記(Token)或軟體自動產生簽入用通行碼
+- 簽入時每次產生的通行碼只能使用一次
+- 可防止通行碼被竊聽而偽冒簽入的問題
+- 可防止通行碼猜測攻擊
+- 一次性通行碼身分鑑別技術可區分為同步式或非同步式兩類
+  - `同步式`一次性通行碼技術：使用者持有的一次性通行碼產生符記與鑑別伺服器間有同步機制
+  - `非同步式`一次性通行碼技術：一次性通行碼產生符記與鑑別伺服器沒有同步機制，因此需要採用Challenge/Response的機制傳送動態的參數
+
+
+
+## 3_詰問與回應身分鑑別技術
+
+## 4_生物特徵鑑別技術  
+- [[技術解讀：一文帶你全面了解生物特徵識別技術]](https://kknews.cc/science/kyqr28q.html)
+- 採用人類本身即具備的屬性進行識別與鑑別，例如：指紋、掌紋、視網膜、虹膜、聲紋及面容等
+- 是目前最昂貴、最複雜、但也最能識別人員身分的鑑別技術。
+- 不過，目前人類社會對這種技術的接受性較低，主要原因是生物特徵鑑別技術可能需要取得人類的隱私資訊、有些技術(例如：血液)需進行身體侵入動作，而且在鑑別過程中因身體接觸而有傳染病感染的疑慮
+    - 指紋(Fingerprint)
+      - 可接受程度較高
+      - 辨識精準度高
+      - 指紋辨識設備較便宜
+    - 掌紋(Hand Geometry)
+      - 非侵入性，可接受程度高
+      - 辨識誤判率仍高
+      - 掌紋辨識設備較貴
+    - 面容(Facial)
+      - 可接受程度較高(非侵入與非接觸)
+      - 辨識精準度較差
+      - 目前尚無標準的特徵值作法
+      - 面容辨識設備較便宜
+      - 特殊化裝後可以輕易欺騙辨識機制
+      - 適用於長距離辨識
+      - 外部干擾因素多(眼鏡、頭髮及帽子等)
+    - 虹膜(Iris)
+      - 可接受程度一般(非侵入與非接觸)
+      - 辨識精準度高
+      - 虹膜辨識設備成本高
+      - 與面容辨識相較，需較近的距離
+    - 其他的生物特徵鑑別技術
+      - 視網膜(Retina)
+      - 聲紋(Voice)
+      - 簽名(Signature)
+      - 血液(Blood)
+      - 靜脈(Vein)
+      - DNA
+      - 手型
+      - 人耳
+
+
+- [雜湊(Hashing)](https://en.wikipedia.org/wiki/Hash_function)
+- [鹽(Salt)](https://en.wikipedia.org/wiki/Salt_(cryptography))
+
+# 3_3_密碼學
+```
+對稱密鑰(Symmetric-key)
+   https://en.wikipedia.org/wiki/Symmetric-key_algorithm
+公開金鑰密碼學(Public-key cryptography)
+   https://en.wikipedia.org/wiki/Public-key_cryptography
+數位簽章(Digital Signature)
+   https://en.wikipedia.org/wiki/Digital_signature
+數位憑證（digital certificate）
+   https://en.wikipedia.org/wiki/Public_key_certificate
+數位憑證認證機構(Certificate Authority)
+   https://en.wikipedia.org/wiki/Certificate_authority
+```
