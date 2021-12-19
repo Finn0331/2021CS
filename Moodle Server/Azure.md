@@ -1,4 +1,4 @@
-# 在Azure上建立Moodle
+# Azure、AWS、GCP上建立Moodle指令集
 #### 注意事項: 建立好虛擬機器後需新增http、https連線方式
 ```
 - sudo yum update //更新套件
