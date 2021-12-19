@@ -25,18 +25,24 @@
     - 2.sudo dnf install -y https://rpms.remirepo.net/enterprise/remi-release-8.rpm
 - 3.sudo dnf module list php //列出可用PHP
 - 4.sudo dnf module enable php:remi-7.4 -y //啟用PHP 7.4模塊
-- 5.dnf install -y php php-cli php-common //安裝PHP7.4
+- 5.sudo dnf install -y php php-cli php-common //安裝PHP7.4
 ```
 ### 安裝PHP擴充SQL
 ```
-- 1.dnf install -y php-mysqlnd //安裝php-mysqlnd包
+- 1.sudo dnf install -y php-mysqlnd //安裝php-mysqlnd包
 - 2.php -m | grep -i mysql //驗證有無安裝
 
 ### 必要擴充
 - 1.sudo yum install php-zip
-- 2.sudo yum install php-gd php-init
+- 2.sudo yum install php-gd php-intl
 ```
-
+### SELinux
+```
+- 0.sudo yum install vim //安裝vim
+- 1.sudo vim /etc/selinux/config //開啟SELinux設定檔
+- 2.SELINUX=(enforcing) 改成 disable //關閉SELinux
+- 3.關閉後重啟虛擬機
+```
 ### Mariadb
 ```
 - 1.sudo yum install mariadb-server mariadb //安裝Mariadb
@@ -45,19 +51,21 @@
 ```
 ### 資料庫
 ```
-- 1.sudo mysql -u root -p //登入root
+- 1.sudo mysql -u root -p //登入root (密碼空白按enter即可)
 - 2.create database moodle; //建立資料庫 ///moodle(資料庫名稱)
 - 3.CREATE USER 'ksu'@'%' IDENTIFIED BY 'PASSWORD'; //建立使用者及密碼
 - 4.GRANT ALL PRIVILEGES ON *.* TO 'ksu'@'%' IDENTIFIED BY 'PASSWORD'; //給予權限
 - 5.FLUSH PRIVILEGES; //刷新權限
+- 6.quit //登出
 ```
 ### Moodle
 ```
+- 0.sudo yum install wget //安裝wget
 - 1.cd /var/www/html //位置到html
 - 2.sudo wget https://download.moodle.org/download.php/direct/stable311/moodle-latest-311.tgz //下載moodle
 - 3.sudo tar zxvf moodle-latest-311.tgz //解壓縮
 - 4.sudo mkdir ../moodledata //建立moodle資料位置
-- 5.sudo chown -R apache:apache  ../html //給予權限
-- 6.sudo chown -R apache:apache ../moodledata //給予權限
+- 5.sudo chown -R apache:apache  moodle //給予權限
+- 6.sudo chown -R apache:apache moodledata //給予權限
 - 7.sudo systemctl restart httpd //重新啟動
 ```
