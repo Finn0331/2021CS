@@ -14,6 +14,8 @@
 - 12.![](https://i.imgur.com/MGOy2S2.png)
 - 13.![](https://i.imgur.com/zJiLI0F.png)
 - 14.![](https://i.imgur.com/zVcB1oc.png)
+- 15.連線成功![](https://i.imgur.com/Lob5gJ7.png)
+
 
 
 
