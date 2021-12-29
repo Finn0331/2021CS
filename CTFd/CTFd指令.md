@@ -4,7 +4,7 @@
 (1)sudo apt-get update -y;sudo reboot
 (1-1)sudo apt-get install python3-pip -y; sudo python3 -m pip install Flask; sudo apt install mariadb-server -y;sudo apt-get install libmariadbclient-dev -y ; sudo apt install nginx -y; sudo pip3 install uwsgi; sudo apt install uwsgi -y; sudo apt install redis-server -y; sudo apt-get install unzip -y; sudo apt-get install -y uwsgi-plugin-python3; sudo apt-get install -y docker; sudo apt-get install -y docker.io;
 (2)sudo git clone https://github.com/CTFd/CTFd.git
-以下為上列的整理，輸入上列即可
+
 ````````
 sudo apt-get update -y; 
 sudo apt-get install python3-pip -y;
