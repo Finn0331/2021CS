@@ -109,18 +109,18 @@ server {
 - 15.創建啟動 CTFd 腳本
 	- 15-1 
 	- A.start.sh
-sudo vim start.sh
-sudo chmod +x start.sh
-sudo uwsgi -d --ini /etc/uwsgi/apps-enabled/uwsgi.ini
+		- sudo vim start.sh
+		- sudo chmod +x start.sh
+		- sudo uwsgi -d --ini /etc/uwsgi/apps-enabled/uwsgi.ini
      	- B.restart.sh
-     sudo vim restart.sh
-     sudo chmod +x restart.sh
-     sudo pkill uwsgi -9
-     sudo uwsgi -d --ini /etc/uwsgi/apps-enabled/uwsgi.ini
+     		- sudo vim restart.sh
+     		- sudo chmod +x restart.sh
+     		- sudo pkill uwsgi -9
+     		- sudo uwsgi -d --ini /etc/uwsgi/apps-enabled/uwsgi.ini
      	- C.stop.sh
-     sudo vim stop.sh
-     sudo chmod +x stop.sh
-     sudo pkill uwsgi -9
+     		- sudo vim stop.sh
+     		- sudo chmod +x stop.sh
+     		- sudo pkill uwsgi -9
 
 - 16.啟動CTFd
 chmod +x start.sh
