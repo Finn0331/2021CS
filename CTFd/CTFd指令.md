@@ -1,39 +1,39 @@
 # CTFd
 
-- 1.sudo apt update && sudo apt dist-upgrade //更新、升級
-- 2.sudo apt install python3-pip mariadb-server libmariadbclient-dev nginx uwsgi redis-server unzip uwsgi-plugin-python3 docker docker.io //安裝額外擴充
-- 3.sudo pip3 install Flask uwsgi //安裝Python擴充
-- 4.cd ~
+1.sudo apt update && sudo apt dist-upgrade //更新、升級
+2.sudo apt install python3-pip mariadb-server libmariadbclient-dev nginx uwsgi redis-server unzip uwsgi-plugin-python3 docker docker.io //安裝額外擴充
+3.sudo pip3 install Flask uwsgi //安裝Python擴充
+4.cd ~
 git clone https://github.com/CTFd/CTFd.git //下載CTFd
-- 5.sudo vim ~/CTFd/prepare.sh //編輯prepare.sh
-- 6.sudo sh ~/CTFd/prepare.sh //執行prepare.sh
-- 7.sudo vim /etc/redis/redis.conf //編輯redis.conf
-- 8.設定mariadb
-	- 8-1sudo mysql -u root -p //管理員登入mariadb
-	- 8-2SET character_set_server = 'latin1';
+5.sudo vim ~/CTFd/prepare.sh //編輯prepare.sh
+6.sudo sh ~/CTFd/prepare.sh //執行prepare.sh
+7.sudo vim /etc/redis/redis.conf //編輯redis.conf
+8.設定mariadb
+8-1 sudo mysql -u root -p //管理員登入mariadb
+8-2 SET character_set_server = 'latin1';
     SET character_set_results = 'utf8';
     SET character_set_filesystem = 'binary';
     SET character_set_database = 'latin1';
     SET character_set_connection = 'utf8';
     SET character_set_client = 'utf8'; 
     // 設定character
-	- 8-3SHOW VARIABLES LIKE 'character\_set\_%'; 
+8-3 SHOW VARIABLES LIKE 'character\_set\_%'; 
 //確認設定
-	- 8-4create database CtfdDataBase;//創建資料庫
-	- 8-5CREATE USER 'ctfduser'@'%' IDENTIFIED BY 'PASSWORD';//建立使用者
-	- 8-6GRANT ALL PRIVILEGES ON *.* TO 'ctfduser'@'%' IDENTIFIED BY 'PASSWORD';//給予權限
-	- 8-7FLUSH PRIVILEGES; //刷新授權
-	- 8-8quit //登出
-- 9.改變CTFd資料庫連結
-	- 9-1 sudo vim ~/CTFd/CTFd/config.py //編輯config.py
-	- 9-2 DATABASE_URL = 'mysql+pymysql://MariaDB_User:MariaDB_Password@localhost:3306/ctfd'
+8-4 create database CtfdDataBase;//創建資料庫
+8-5 CREATE USER 'ctfduser'@'%' IDENTIFIED BY 'PASSWORD';//建立使用者
+8-6 GRANT ALL PRIVILEGES ON *.* TO 'ctfduser'@'%' IDENTIFIED BY 'PASSWORD';//給予權限
+8-7 FLUSH PRIVILEGES; //刷新授權
+8-8 quit //登出
+9.改變CTFd資料庫連結
+9-1 sudo vim ~/CTFd/CTFd/config.py //編輯config.py
+9-2 DATABASE_URL = 'mysql+pymysql://MariaDB_User:MariaDB_Password@localhost:3306/ctfd'
 REDIS_URL = 'redis://127.0.0.1:6379'
 //變更DATABASE_URL & REDIS_URL 數值
-- 10.將CTFd路徑添加到python sys.path並註釋一些代碼
-	- 10-1 sudo vim ~/CTFd/wsgi.py //編輯wsgi.py
-	- 10-2 sys.path.insert(0, '/home/ksu/CTFd')//添加內容並註釋一些代碼
-- 11.變更uwsgi設定
-	- 11-1 sudo vim /etc/uwsgi/apps-available/uwsgi.ini //編輯uwsgi.ini
+10.將CTFd路徑添加到python sys.path並註釋一些代碼
+10-1 sudo vim ~/CTFd/wsgi.py //編輯wsgi.py
+10-2 sys.path.insert(0, '/home/ksu/CTFd')//添加內容並註釋一些代碼
+11.變更uwsgi設定
+11-1 sudo vim /etc/uwsgi/apps-available/uwsgi.ini //編輯uwsgi.ini
 ```
 11-2 [uwsgi]
  Where you've put CTFD
@@ -78,11 +78,11 @@ uid = www-data
 gid = www-data
 daemonize=/var/log/uwsgi/ctfd.log
 ```
-- 12.sudo ln -s /etc/uwsgi/apps-available/uwsgi.ini /etc/uwsgi/apps-enabled/uwsgi.ini //連接uwsgi
-- 13.sudo chown -R www-data:www-data ~/CTFd/ //更改CTFd目錄授權
-- 14.變更nginx設定
-	- 14-1 sudo rm /etc/nginx/sites-available/default刪除defalt設定
-	- 14-2 sudo vim /etc/nginx/sites-available/default創建並編輯新的defalt設定
+12.sudo ln -s /etc/uwsgi/apps-available/uwsgi.ini /etc/uwsgi/apps-enabled/uwsgi.ini //連接uwsgi
+13.sudo chown -R www-data:www-data ~/CTFd/ //更改CTFd目錄授權
+14.變更nginx設定
+14-1 sudo rm /etc/nginx/sites-available/default刪除defalt設定
+14-2 sudo vim /etc/nginx/sites-available/default創建並編輯新的defalt設定
 ```
 14-3 添加內容
 server {
@@ -106,35 +106,34 @@ server {
 	client_max_body_size 1000m;
         }
 ```
-- 15.創建啟動 CTFd 腳本
-	- 15-1 
-	- A.start.sh
-		- sudo vim start.sh
-		- sudo chmod +x start.sh
-		- sudo uwsgi -d --ini /etc/uwsgi/apps-enabled/uwsgi.ini
-     	- B.restart.sh
-     		- sudo vim restart.sh
-     		- sudo chmod +x restart.sh
-     		- sudo pkill uwsgi -9
-     		- sudo uwsgi -d --ini /etc/uwsgi/apps-enabled/uwsgi.ini
-     	- C.stop.sh
-     		- sudo vim stop.sh
-     		- sudo chmod +x stop.sh
-     		- sudo pkill uwsgi -9
+15.創建啟動 CTFd 腳本
+15-1 A.start.sh
+sudo vim start.sh
+sudo chmod +x start.sh
+sudo uwsgi -d --ini /etc/uwsgi/apps-enabled/uwsgi.ini
+     B.restart.sh
+     sudo vim restart.sh
+     sudo chmod +x restart.sh
+     sudo pkill uwsgi -9
+     sudo uwsgi -d --ini /etc/uwsgi/apps-enabled/uwsgi.ini
+     C.stop.sh
+     sudo vim stop.sh
+     sudo chmod +x stop.sh
+     sudo pkill uwsgi -9
 
-- 16.啟動CTFd
+16.啟動CTFd
 chmod +x start.sh
 ./start.sh 
 
-- 17.安裝docker questions
-	- 17-1 sudo wget http://120.114.62.217/MyFirstSecurity_Docker.zip //安裝questions
-	- 17-2 sudo unzip MyFirstSecurity_Docker.zip//解壓縮MyFirstSecurity_Docker.zip
-	- 17-3 sudo sh docker.sh //執行docker.sh
-	- 17-4 sudo docker ps -a //確保有無運作
-	- 17-5 sudo docker exec –ti [CONTAINER ID] bash//連接docker questionsbash
-	- 17-6 sh /bin/start.sh //執行start.sh(按enter繼續)
-	- 17-7 exit //離開docker questions bash
-- 18.更換questions IP
-	- 18-1 sudo mysql –u root –p //登入mariadb(root)
-	- 18-2 USE ctfddatabase; // 選擇database
-	- 18-3 UPDATE `challenges` SET `description` = replace(`description`, 'old', 'new');// 變更IP
+17.安裝docker questions
+17-1 sudo wget http://120.114.62.217/MyFirstSecurity_Docker.zip //安裝questions
+17-2 sudo unzip MyFirstSecurity_Docker.zip//解壓縮MyFirstSecurity_Docker.zip
+17-3 sudo sh docker.sh //執行docker.sh
+17-4 sudo docker ps -a //確保有無運作
+17-5 sudo docker exec –ti [CONTAINER ID] bash//連接docker questionsbash
+17-6 sh /bin/start.sh //執行start.sh(按enter繼續)
+17-7 exit //離開docker questions bash
+18.更換questions IP
+18-1 sudo mysql –u root –p //登入mariadb(root)
+18-2 USE ctfddatabase; // 選擇database
+18-3 UPDATE `challenges` SET `description` = replace(`description`, 'old', 'new');// 變更IP
