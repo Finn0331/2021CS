@@ -25,15 +25,15 @@ git clone https://github.com/CTFd/CTFd.git //下載CTFd
 	- 8-7FLUSH PRIVILEGES; //刷新授權
 	- 8-8quit //登出
 - 9.改變CTFd資料庫連結
-- 9-1 sudo vim ~/CTFd/CTFd/config.py //編輯config.py
-- 9-2 DATABASE_URL = 'mysql+pymysql://MariaDB_User:MariaDB_Password@localhost:3306/ctfd'
+	- 9-1 sudo vim ~/CTFd/CTFd/config.py //編輯config.py
+	- 9-2 DATABASE_URL = 'mysql+pymysql://MariaDB_User:MariaDB_Password@localhost:3306/ctfd'
 REDIS_URL = 'redis://127.0.0.1:6379'
 //變更DATABASE_URL & REDIS_URL 數值
 - 10.將CTFd路徑添加到python sys.path並註釋一些代碼
-- 10-1 sudo vim ~/CTFd/wsgi.py //編輯wsgi.py
-- 10-2 sys.path.insert(0, '/home/ksu/CTFd')//添加內容並註釋一些代碼
+	- 10-1 sudo vim ~/CTFd/wsgi.py //編輯wsgi.py
+	- 10-2 sys.path.insert(0, '/home/ksu/CTFd')//添加內容並註釋一些代碼
 - 11.變更uwsgi設定
-- 11-1 sudo vim /etc/uwsgi/apps-available/uwsgi.ini //編輯uwsgi.ini
+	- 11-1 sudo vim /etc/uwsgi/apps-available/uwsgi.ini //編輯uwsgi.ini
 ```
 11-2 [uwsgi]
  Where you've put CTFD
@@ -81,8 +81,8 @@ daemonize=/var/log/uwsgi/ctfd.log
 - 12.sudo ln -s /etc/uwsgi/apps-available/uwsgi.ini /etc/uwsgi/apps-enabled/uwsgi.ini //連接uwsgi
 - 13.sudo chown -R www-data:www-data ~/CTFd/ //更改CTFd目錄授權
 - 14.變更nginx設定
-- 14-1 sudo rm /etc/nginx/sites-available/default刪除defalt設定
-- 14-2 sudo vim /etc/nginx/sites-available/default創建並編輯新的defalt設定
+	- 14-1 sudo rm /etc/nginx/sites-available/default刪除defalt設定
+	- 14-2 sudo vim /etc/nginx/sites-available/default創建並編輯新的defalt設定
 ```
 14-3 添加內容
 server {
@@ -107,7 +107,7 @@ server {
         }
 ```
 - 15.創建啟動 CTFd 腳本
-- 15-1 
+	- 15-1 
 	- A.start.sh
 sudo vim start.sh
 sudo chmod +x start.sh
