@@ -1,7 +1,7 @@
 # CTFd
 
-1.sudo apt update && sudo apt dist-upgrade //更新、升級
-2.sudo apt install python3-pip mariadb-server libmariadbclient-dev nginx uwsgi redis-server unzip uwsgi-plugin-python3 docker docker.io //安裝額外擴充
+- sudo apt update && sudo apt dist-upgrade //更新、升級
+- sudo apt install python3-pip mariadb-server libmariadbclient-dev nginx uwsgi redis-server unzip uwsgi-plugin-python3 docker docker.io //安裝額外擴充
 3.sudo pip3 install Flask uwsgi //安裝Python擴充
 4.cd ~
 git clone https://github.com/CTFd/CTFd.git //下載CTFd
