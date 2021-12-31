@@ -1,30 +1,30 @@
 # CTFd
 
-- sudo apt update && sudo apt dist-upgrade //更新、升級
-- sudo apt install python3-pip mariadb-server libmariadbclient-dev nginx uwsgi redis-server unzip uwsgi-plugin-python3 docker docker.io //安裝額外擴充
-3.sudo pip3 install Flask uwsgi //安裝Python擴充
-4.cd ~
+- 1.sudo apt update && sudo apt dist-upgrade //更新、升級
+- 2.sudo apt install python3-pip mariadb-server libmariadbclient-dev nginx uwsgi redis-server unzip uwsgi-plugin-python3 docker docker.io //安裝額外擴充
+- sudo pip3 install Flask uwsgi //安裝Python擴充
+- cd ~
 git clone https://github.com/CTFd/CTFd.git //下載CTFd
-5.sudo vim ~/CTFd/prepare.sh //編輯prepare.sh
-6.sudo sh ~/CTFd/prepare.sh //執行prepare.sh
-7.sudo vim /etc/redis/redis.conf //編輯redis.conf
-8.設定mariadb
-8-1 sudo mysql -u root -p //管理員登入mariadb
-8-2 SET character_set_server = 'latin1';
+- sudo vim ~/CTFd/prepare.sh //編輯prepare.sh
+- sudo sh ~/CTFd/prepare.sh //執行prepare.sh
+- sudo vim /etc/redis/redis.conf //編輯redis.conf
+- 設定mariadb
+	- sudo mysql -u root -p //管理員登入mariadb
+	- SET character_set_server = 'latin1';
     SET character_set_results = 'utf8';
     SET character_set_filesystem = 'binary';
     SET character_set_database = 'latin1';
     SET character_set_connection = 'utf8';
     SET character_set_client = 'utf8'; 
     // 設定character
-8-3 SHOW VARIABLES LIKE 'character\_set\_%'; 
+	- SHOW VARIABLES LIKE 'character\_set\_%'; 
 //確認設定
-8-4 create database CtfdDataBase;//創建資料庫
-8-5 CREATE USER 'ctfduser'@'%' IDENTIFIED BY 'PASSWORD';//建立使用者
-8-6 GRANT ALL PRIVILEGES ON *.* TO 'ctfduser'@'%' IDENTIFIED BY 'PASSWORD';//給予權限
-8-7 FLUSH PRIVILEGES; //刷新授權
-8-8 quit //登出
-9.改變CTFd資料庫連結
+	- create database CtfdDataBase;//創建資料庫
+	- CREATE USER 'ctfduser'@'%' IDENTIFIED BY 'PASSWORD';//建立使用者
+	- GRANT ALL PRIVILEGES ON *.* TO 'ctfduser'@'%' IDENTIFIED BY 'PASSWORD';//給予權限
+	- FLUSH PRIVILEGES; //刷新授權
+	- quit //登出
+- 9.改變CTFd資料庫連結
 9-1 sudo vim ~/CTFd/CTFd/config.py //編輯config.py
 9-2 DATABASE_URL = 'mysql+pymysql://MariaDB_User:MariaDB_Password@localhost:3306/ctfd'
 REDIS_URL = 'redis://127.0.0.1:6379'
