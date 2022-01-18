@@ -24,8 +24,9 @@
     - 1.sudo rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
     - 2.sudo dnf install -y https://rpms.remirepo.net/enterprise/remi-release-8.rpm
 - 3.sudo dnf module list php //列出可用PHP
-- 4.sudo dnf module enable php:remi-7.4 -y //啟用PHP 7.4模塊
-- 5.sudo dnf install -y php php-cli php-common //安裝PHP7.4
+- 4.sudo dnf module enable php:remi-7.3 -y //啟用PHP 7.3模塊
+- 5.sudo dnf install -y php php-cli php-common //安裝PHP7.3
+- 6.sudo dnf install -y php-mysqlnd php php-cli php-common php-fpm php-zip php-gd php-intl php-xmlrpc php-soap php-sodium //安裝套件
 ```
 ### 安裝PHP擴充SQL
 ```
