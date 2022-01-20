@@ -57,10 +57,7 @@
 
 ![](https://i.imgur.com/UJeWgac.png)
 
-- 表示收到聲音且會放出變聲後的樣子
-
-![](https://i.imgur.com/UVWlivY.png)
-
+- [變聲後的範例](https://github.com/Finn0331/2021CS/blob/main/OBS/voicechanger/OBSvoicechangertest.mkv)
 
 
 
