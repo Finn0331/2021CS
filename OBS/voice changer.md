@@ -1,7 +1,9 @@
 # OBS變聲(voice changer)
 - 先在C槽的Program Files、Program Files(x86)裡各建立一個名為VSTPlugins的資料夾
 - 使用[GVST](https://www.gvst.co.uk/beta.htm)
+
 ![](https://i.imgur.com/iK4EXPH.png)
+
 - 點擊之後會有兩個檔案
 ![](https://i.imgur.com/b1P6tZ4.png)
 - 解壓縮之後將GForm.dll檔複製到VSTPlugins的資料夾裡面
